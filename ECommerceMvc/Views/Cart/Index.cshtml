@@ -1,0 +1,82 @@
+﻿@model ECommerceMvc.Models.Cart
+
+
+
+
+<div class="container pb-5">
+    <div class=" row">
+        <div class="col-md-12">
+            <div class="m-5 ">
+            <h2>Sepetim</h2>
+
+            </div>
+            
+            @if (Model.CartLines.Count != 0)
+            {
+                <table style="text-align:center; " class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Adet</th>
+                            <th>Ürün</th>
+                            <th>Fiyat</th>
+                            <th>Toplam</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.CartLines)
+                        {
+                            <tr>
+                                <td style="vertical-align: middle;">
+                                    <img src="@item.Product.ProductImage" width="50">
+                                </td>
+                                <td style="vertical-align: middle;">
+                                    @item.Quantity
+                                </td>
+                                <td style="vertical-align: middle;">
+                                    @item.Product.ProductName
+                                </td>
+                                <td style="vertical-align: middle;">
+                                    @item.Product.Price
+
+                                </td>
+                                <td style="vertical-align: middle;">
+                                    @((item.Product.Price * item.Quantity).ToString("c"))
+                                </td>
+                                <td style="max-width: 75px; vertical-align:middle;">
+                                    @using (Html.BeginForm("RemoveFromCart", "Cart"))
+                                    {
+                                        @Html.Hidden("productId",item.Product.ProductId)
+                                        <button type="submit" class="btn text-danger bg-transparent">
+                                            <i class="fa fa-trash"></i>
+                                            Çıkar
+                                        </button>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4"></td>
+                            <td>
+                                @Model.TotalPrice().ToString("c")
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+               
+                    <div style="text-align:center;">
+                    <a asp-controller="Cart" asp-action="ClearCart" class="btn btn-danger">Sepeti Boşalt</a>
+                    </div>
+            }
+            else
+            {
+                <div style="vertical-align:middle; text-align:center; " class="alert alert-warning" role="alert">
+                  <i class="fa fa-exclamation-circle"></i>
+                    Sepetinizde ürün bulunmamaktadır.
+                </div>
+            }
+        </div>
+    </div>
+</div>
