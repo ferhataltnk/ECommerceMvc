@@ -1,0 +1,139 @@
+﻿@using Entities
+@model Product
+
+@{
+    Layout = null;
+    List<Review> myReviews = ViewData["Review"] as List<Review>;
+}
+
+<script>
+    function toggleReviews() {
+        var reviewsDiv = document.getElementById("reviews");
+        var commentDiv = document.getElementById("comment");
+
+        if (commentDiv.style.display !== "none") {
+            commentDiv.style.display = "none";
+        }
+
+        if (reviewsDiv.style.display === "none") {
+            reviewsDiv.style.display = "block";
+        } else {
+            reviewsDiv.style.display = "none";
+        }
+    }
+
+    function toggleComment() {
+        var commentDiv = document.getElementById("comment");
+        var reviewsDiv = document.getElementById("reviews");
+
+        if (reviewsDiv.style.display !== "none") {
+            reviewsDiv.style.display = "none";
+        }
+
+        if (commentDiv.style.display === "none") {
+            commentDiv.style.display = "block";
+        } else {
+            commentDiv.style.display = "none";
+        }
+    }
+
+</script>
+
+
+
+
+@Html.Partial("/Views/Shared/LayoutPartial/HeaderPartial.cshtml")
+<div class="container" style=" margin-block: 75px;">
+    <div class="row">
+        <div class="col-md-5">
+            <img src="@Model.ProductImage" alt="@Model.ProductName" class="img-fluid">
+        </div>
+        <div class="col-md-7">
+            <h1>@Model.ProductName</h1>
+
+            <h2>Fiyat: @Model.Price TL</h2>
+
+            <form method="post" asp-controller="Cart" asp-action="AddToCart">
+                <div class="form-group">
+                    <label name="quantity">Adet:</label>
+                    <input name="quantity" type="number" class="form-control" value="1">
+                </div>
+                <input type="hidden" asp-for="ProductId" value="@Model.ProductId">
+                <button type="submit" class="btn btn-primary btn-outline-primary">
+                    <i class="fa fa-shopping-cart"> </i>
+                    Sepete Ekle
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="row d-flex justify-content-center">
+    <div class="col-3 text-center mt-5 mb-5">
+        <button onclick="toggleReviews()" class="btn btn-primary btn-outline-primary btn-block btn">Yorumları Göster/Gizle</button>
+    </div>
+    <div class="col-3 text-center mt-5 mb-5">
+        <button onclick="toggleComment()" class="btn btn-primary btn-outline-primary btn-block btn">Yorum Yap</button>
+    </div>
+</div>
+
+
+
+@if (myReviews.Count != 0)
+{
+    <div id="reviews" style="display:none" class="container ">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Ürün Yorumları</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Yorum</th>
+                            <th>Yazan</th>
+                            <th>Tarih</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var review in @myReviews)
+                        {
+                            <tr>
+                                <td>@review.Comment</td>
+                                <td>
+                                    @(
+                                        review.UserId == 1 ? "Ferhat" : "Kullanıcı"
+                                        )
+                                </td>
+                                <td>@review.ReviewDate</td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div id="reviews" style="display:none" class="container">
+        <div class="alert alert-warning d-flex justify-content-center mb-5" role="alert">
+            Ürün için yorum yapılmamış.
+        </div>
+
+    </div>
+}
+
+
+<div id="comment" style="display:none" class="container">
+    @await Component.InvokeAsync("CommentForm",Model.ProductId)
+</div>
+
+
+
+
+
+@Html.Partial("/Views/Shared/LayoutPartial/FooterPartial.cshtml")
+
+@Html.Partial("/Views/Shared/LayoutPartial/ScriptPartial.cshtml")

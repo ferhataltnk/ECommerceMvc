@@ -1,0 +1,36 @@
+﻿@using Entities
+@model Review
+
+<div class="m-5 ">
+
+<h3>Yeni Yorum Ekle</h3>
+
+<form asp-controller="Product" asp-action="AddReview" method="post">
+    <div class="form-group">
+            <input type="hidden" name="ProductId" value="@ViewBag.ProductId" />
+    </div>
+    <div class="form-group">
+            <input type="hidden" name="UserId" value="1"/>
+    </div>
+    <div class="form-group">
+        <label asp-for="Comment">Yorum</label>
+        <textarea asp-for="Comment" class="form-control" required></textarea>
+        <span asp-validation-for="Comment" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Rating">Puan</label>
+        <select asp-for="Rating" class="form-control" required>
+            <option value="">Seçiniz</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <span asp-validation-for="Rating" class="text-danger"></span>
+    </div>
+    <div class="form-group text-right">
+        <button type="submit" class="btn btn-primary">Yorum Yap</button>
+    </div>
+</form>
+</div>
