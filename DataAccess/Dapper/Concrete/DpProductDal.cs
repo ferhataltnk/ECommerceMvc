@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using DataAccess.Dapper.Abstract;
+using DataAccess.Dapper.Constants;
 using Entities;
 using Microsoft.Extensions.Configuration;
 using System.Data.SqlClient;
@@ -22,7 +23,7 @@ namespace DataAccess.Dapper.Concrete
                 connection.Open();
 
                 var products = connection.Query<Product>(
-                    "SELECT * FROM PRODUCTS"
+                    Query.QUERY_PRODUCTS_GET_ALL_PRODUCTS
                     );
 
                 connection.Close();

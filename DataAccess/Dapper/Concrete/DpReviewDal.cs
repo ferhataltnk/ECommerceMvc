@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using DataAccess.Dapper.Abstract;
+using DataAccess.Dapper.Constants;
 using Entities;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -26,7 +27,7 @@ namespace DataAccess.Dapper.Concrete
                 connection.Open();
 
                 var reviews = connection.Query<Review>(
-                    "SELECT * FROM REVIEWS WHERE ProductId = @productId",
+                    Query.QUERY_REVIEWS_GET_REVIEW_BY_PRODUCTID,
                     param: new
                     {
                         productId = productId
@@ -47,7 +48,7 @@ namespace DataAccess.Dapper.Concrete
             {
                 connection.Open();
 
-                connection.ExecuteReader("INSERT INTO Reviews (ProductId, UserId, Comment, Rating, ReviewDate) VALUES (@ProductId, @UserId, @Comment, @Rating, GETDATE());",
+                connection.ExecuteReader(Query.QUERY_REVIEWS_INSERT_INTO_REVIEW,
                     param:new {ProductId=review.ProductId,
                                UserId=review.UserId,
                                Comment=review.Comment,
