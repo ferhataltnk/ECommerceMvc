@@ -2,28 +2,25 @@
 using ECommerceMvc.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
-using System.Text.Json;
 
 namespace ECommerceMvc.Controllers
 {
     public class CartController : Controller
     {
         private readonly IProductService _productService;
-        private readonly IMemoryCache _cache;
-        private const string CartKey = "Cart";
+        private readonly ICartService _cartService;
 
-        
-        public CartController(IProductService productService, IMemoryCache cache)
+
+        public CartController(IProductService productService, ICartService cartService)
         {
             _productService = productService;
-            _cache = cache;
+            _cartService = cartService;
+  
         }
         public IActionResult Index()
         {
-            return View(GetCart());
+            //return View(GetCart());
+            return View(_cartService.GetCart());
         }
         
         public IActionResult AddToCart(int ProductId,int quantity)
@@ -32,7 +29,7 @@ namespace ECommerceMvc.Controllers
 
             if(product != null)
             {
-                GetCart().AddProduct(product,quantity);
+                _cartService.GetCart().AddProduct(product,quantity);
             }
            
             return RedirectToAction("Index");
@@ -44,7 +41,7 @@ namespace ECommerceMvc.Controllers
 
             if (product != null)
             {
-                GetCart().DeleteProduct(product);
+                _cartService.GetCart().DeleteProduct(product);
             }
             return RedirectToAction("Index");
         }
@@ -53,7 +50,8 @@ namespace ECommerceMvc.Controllers
 
         public ActionResult ClearCart()
         {
-            GetCart().Clear();
+            
+            _cartService.GetCart().Clear();
             return RedirectToAction("Index");
         }
 
@@ -77,27 +75,6 @@ namespace ECommerceMvc.Controllers
         //    Cart existingCart = JsonSerializer.Deserialize<Cart>(json);
         //    return existingCart;
         //}
-
-
-
-            [NonAction]
-            public Cart GetCart()
-            {
-                if (_cache.TryGetValue(CartKey, out Cart existingCart))
-                {
-                    return existingCart;
-                }
-
-                var cart = new Cart();
-                _cache.Set(CartKey, cart);
-                return cart;
-            }
-     
-
-
-
-
-
 
 
 

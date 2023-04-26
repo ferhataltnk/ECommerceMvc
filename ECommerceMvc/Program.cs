@@ -12,7 +12,8 @@ builder.Services.AddSingleton<IProductService,ProductManager>();
 builder.Services.AddSingleton<IProductDal,DpProductDal>();
 builder.Services.AddSingleton<IReviewService, ReviewManager>();
 builder.Services.AddSingleton<IReviewDal, DpReviewDal>();
-
+builder.Services.AddSingleton<ICartLineService, CartLineManager>();
+builder.Services.AddSingleton<ICartService, CartManager>();
 
 
 builder.Services.AddSession();

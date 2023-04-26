@@ -5,11 +5,13 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECommerceMvc", "ECommerceMvc\ECommerceMvc.csproj", "{F8071D1B-4C90-42B1-B962-E799ABBE1763}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{557B5B1F-A024-44C9-BAB6-EA2760E4EFFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entities.csproj", "{557B5B1F-A024-44C9-BAB6-EA2760E4EFFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{7A7A5383-D04B-4C23-AB7F-B1874B3209B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{7A7A5383-D04B-4C23-AB7F-B1874B3209B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business", "Business\Business.csproj", "{C8119E78-FB20-47C6-A08E-1260270F54E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business", "Business\Business.csproj", "{C8119E78-FB20-47C6-A08E-1260270F54E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{24BF41AA-594E-497C-91D5-32D582AD3899}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{C8119E78-FB20-47C6-A08E-1260270F54E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8119E78-FB20-47C6-A08E-1260270F54E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8119E78-FB20-47C6-A08E-1260270F54E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24BF41AA-594E-497C-91D5-32D582AD3899}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24BF41AA-594E-497C-91D5-32D582AD3899}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24BF41AA-594E-497C-91D5-32D582AD3899}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24BF41AA-594E-497C-91D5-32D582AD3899}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
