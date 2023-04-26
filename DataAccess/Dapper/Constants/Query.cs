@@ -11,14 +11,14 @@
         ";
 
 
+
         //REVIEW QUERIES
         public const string QUERY_REVIEWS_GET_REVIEW_BY_PRODUCTID = @"
         SELECT * 
         FROM REVIEWS 
         WHERE ProductId = @productId
         ";
-        
-        
+         
         public const string QUERY_REVIEWS_INSERT_INTO_REVIEW = @"
         INSERT INTO Reviews (
 	            ProductId,

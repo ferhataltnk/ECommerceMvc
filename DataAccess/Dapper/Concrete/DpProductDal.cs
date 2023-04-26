@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿using Core.Utilities.Results;
+using Dapper;
 using DataAccess.Dapper.Abstract;
 using DataAccess.Dapper.Constants;
 using Entities;
@@ -16,19 +17,27 @@ namespace DataAccess.Dapper.Concrete
             _configuration = configuration;
         }
 
-        public List<Product> GetProducts()
+        public Result<List<Product>> GetProducts()
         {
-            using (var connection = new SqlConnection(_configuration.GetConnectionString("flyerConnectionString")))
+            try
             {
-                connection.Open();
+                using (var connection = new SqlConnection(_configuration.GetConnectionString("flyerConnectionString")))
+                {
+                    connection.Open();
 
-                var products = connection.Query<Product>(
-                    Query.QUERY_PRODUCTS_GET_ALL_PRODUCTS
-                    );
+                    var products = connection.Query<Product>(
+                        Query.QUERY_PRODUCTS_GET_ALL_PRODUCTS
+                        );
 
-                connection.Close();
-                return products.ToList();
+                    connection.Close();
+                    return new Result<List<Product>>(data: products.ToList(), message: "Ürünler başarıyla getirildi.", success: false);
+                }
             }
+            catch (Exception exception)
+            {
+                return new Result<List<Product>>(data: null, message: $"Ürünler getirilirken bir hata oluştu.{Environment.NewLine}Detay:{exception.Message}", success: false);
+            }
+
         }
     }
 }

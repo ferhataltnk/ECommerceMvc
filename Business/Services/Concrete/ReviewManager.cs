@@ -1,4 +1,5 @@
 ﻿using Business.Services.Abstract;
+using Core.Utilities.Results;
 using DataAccess.Dapper.Abstract;
 using Entities;
 using System;
@@ -17,14 +18,38 @@ namespace Business.Services.Concrete
             _reviewDal = reviewDal;
         }
         
-        public List<Review> GetReviewsByProductId(int productId)
+        public Result<List<Review>> GetReviewsByProductId(int productId)
         {
-            return _reviewDal.GetReviewsByProductId(productId);
+            try
+            {
+                var result = _reviewDal.GetReviewsByProductId(productId);
+                return result.Success ?
+                    new Result<List<Review>>(data: result.Data, message: "Ürün yorumları başarıyla getirildi.", success: true) :
+                    new Result<List<Review>>(data: result.Data, message: result.Message, success: true);
+
+
+            }
+            catch (Exception exception)
+            {
+                return new Result<List<Review>>(data: null, message: $"Ürün yorumları getirilirken beklenmedik bir hata oluştu. {Environment.NewLine} Detay: {exception.Message}", success: false);
+            }
+
         }
 
-        public async Task AddReview(Review review)
+
+        public async Task<Result<string>> AddReview(Review review)
         {
-            _reviewDal.AddReview(review);
+            try
+            {
+                await _reviewDal.AddReviewAsync(review);
+                return new Result<string>(data: null, message: "Yorum başarıyla eklendi.", success: true);
+
+            }
+            catch (Exception exception)
+            {
+                return new Result<string>(data: null, message: $"Yorum eklenirken beklenmedik bir hata oluştu.{Environment.NewLine} Detay: {exception.Message}", success: false);
+            }
+
         }
     }
 }

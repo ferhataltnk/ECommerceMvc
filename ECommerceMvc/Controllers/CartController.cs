@@ -25,7 +25,7 @@ namespace ECommerceMvc.Controllers
         
         public IActionResult AddToCart(int ProductId,int quantity)
         {
-            var product = _productService.GetProducts().FirstOrDefault(i=>i.ProductId== ProductId);
+            var product = _productService.GetProducts().Data.FirstOrDefault(i=>i.ProductId== ProductId);
 
             if(product != null)
             {
@@ -37,7 +37,7 @@ namespace ECommerceMvc.Controllers
 
         public IActionResult RemoveFromCart(int productId)
         {
-            var product = _productService.GetProducts().FirstOrDefault(i => i.ProductId == productId);
+            var product = _productService.GetProducts().Data.FirstOrDefault(i => i.ProductId == productId);
 
             if (product != null)
             {

@@ -1,4 +1,5 @@
 ﻿using Business.Services.Abstract;
+using Core.Utilities.Results;
 using DataAccess.Dapper.Abstract;
 using Entities;
 using System;
@@ -18,9 +19,20 @@ namespace Business.Services.Concrete
             _productDal = productDal;
         }
 
-        public List<Product> GetProducts()
+        public Result<List<Product>> GetProducts()
         {
-            return _productDal.GetProducts();
+            try
+            {
+                var result = _productDal.GetProducts();
+                return result.Success ?
+                    new Result<List<Product>>(data: result.Data, message: "Ürünler başarıyla getirildi.",success:true) :
+                    new Result<List<Product>>(data: result.Data, message: result.Message,success:false);
+            }
+            catch (Exception exception)
+            {
+                return new Result<List<Product>>(data: null, message: $"Ürünler getirilirken beklenmedik bir hata oluştu. {Environment.NewLine} Detay: {exception.Message}", success: false);
+            }
+           
         }
     }
 }

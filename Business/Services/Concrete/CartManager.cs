@@ -22,6 +22,7 @@ namespace Business.Services.Concrete
 
         public CartLineManager GetCart()
         {
+
             if (_cache.TryGetValue(CartKey, out CartLineManager existingCart))
             {
                 return existingCart;

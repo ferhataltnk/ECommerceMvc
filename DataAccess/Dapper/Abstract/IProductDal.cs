@@ -1,4 +1,5 @@
-﻿using Entities;
+﻿using Core.Utilities.Results;
+using Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace DataAccess.Dapper.Abstract
 {
     public interface IProductDal
     {
-        public List<Product> GetProducts();
+        public Result<List<Product>> GetProducts();
     }
 }

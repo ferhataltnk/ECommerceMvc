@@ -15,7 +15,7 @@ namespace ECommerceMvc.Controllers
 
         public IActionResult Index()
         {
-           var model= _productService.GetProducts();
+           var model= _productService.GetProducts().Data;
             return View(model);
         }
     }

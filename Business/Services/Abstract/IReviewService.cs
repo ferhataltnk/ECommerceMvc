@@ -1,4 +1,5 @@
-﻿using Entities;
+﻿using Core.Utilities.Results;
+using Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Business.Services.Abstract
 {
     public interface IReviewService
     {
-        public List<Review> GetReviewsByProductId(int productId);
-        public  Task AddReview(Review review);
+        public Result<List<Review>> GetReviewsByProductId(int productId);
+        public  Task<Result<string>> AddReview(Review review);
     }
 }

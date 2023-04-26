@@ -17,16 +17,16 @@ namespace ECommerceMvc.Controllers
 
         public IActionResult Details(int id)
         {
-            var result = _productService.GetProducts().Where(i=>i.ProductId== id).ToList();
+            var result = _productService.GetProducts().Data.Where(i=>i.ProductId== id).ToList();
             var reviews = _reviewService.GetReviewsByProductId(id);
-            ViewData["Review"] = reviews.ToList();
+            ViewData["Review"] = reviews.Data.ToList();
             return View(result.FirstOrDefault());
         }
 
 
         public IActionResult AddReview (Review review)
         {   
-            _reviewService.AddReview(review);
+             _reviewService.AddReview(review);
            // return RedirectToAction("Details", "Product", review.ProductId);
             return View("/Views/Shared/ProductDetailPartial/CommentSuccessPartial.cshtml");
 
