@@ -2,11 +2,29 @@ using Business.Services.Abstract;
 using Business.Services.Concrete;
 using DataAccess.Dapper.Abstract;
 using DataAccess.Dapper.Concrete;
+using Serilog;
+using Serilog.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
+
+
+
+//Serilog Configuration
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Debug()
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+    .Enrich.FromLogContext()
+    .WriteTo.Debug()
+    .CreateLogger();
+//Serilog IOC
+builder.Host.UseSerilog(Log.Logger);
+
+
+
 
 builder.Services.AddSingleton<IProductService,ProductManager>();
 builder.Services.AddSingleton<IProductDal,DpProductDal>();
@@ -20,9 +38,6 @@ builder.Services.AddSession();
 
 builder.Configuration.AddJsonFile("appsettings.json");
 string connectionString = builder.Configuration.GetConnectionString("flyerConnectionString");
-
-
-
 
 
 

@@ -20,7 +20,7 @@ namespace ECommerceMvc.Controllers
         public IActionResult Index()
         {
             //return View(GetCart());
-            return View(_cartService.GetCart());
+            return View(_cartService.GetCart().Data);
         }
         
         public IActionResult AddToCart(int ProductId,int quantity)
@@ -29,7 +29,7 @@ namespace ECommerceMvc.Controllers
 
             if(product != null)
             {
-                _cartService.GetCart().AddProduct(product,quantity);
+                _cartService.GetCart().Data.AddProduct(product,quantity);
             }
            
             return RedirectToAction("Index");
@@ -41,7 +41,7 @@ namespace ECommerceMvc.Controllers
 
             if (product != null)
             {
-                _cartService.GetCart().DeleteProduct(product);
+                _cartService.GetCart().Data.DeleteProduct(product);
             }
             return RedirectToAction("Index");
         }
@@ -51,7 +51,7 @@ namespace ECommerceMvc.Controllers
         public ActionResult ClearCart()
         {
             
-            _cartService.GetCart().Clear();
+            _cartService.GetCart().Data.Clear();
             return RedirectToAction("Index");
         }
 
