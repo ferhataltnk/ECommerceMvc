@@ -13,6 +13,9 @@ namespace Entities
         public double Price { get; set; }
         public string ProductImage { get; set; }
         public int CategoryId { get; set; }
+        public int Brand { get; set; }
+        public int SubCategory { get; set; }
+        public int? Color { get; set; }
     
     }
 }

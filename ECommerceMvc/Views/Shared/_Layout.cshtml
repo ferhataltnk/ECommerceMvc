@@ -1,31 +1,14 @@
-﻿@*<!DOCTYPE html>
-<html lang="en"> 
-    @Html.Partial("/Views/Shared/LayoutPartial/HeaderPartial.cshtml")
-    <body>
-    @Html.Partial("/Views/Shared/LayoutPartial/NavigationBarPartial.cshtml")
-    
-    @RenderBody()
-    <!-- banner bg main end -->
-    @Html.Partial("/Views/Shared/LayoutPartial/FooterPartial.cshtml")
-    
-    @Html.Partial("/Views/Shared/LayoutPartial/ScriptPartial.cshtml")
-    
-    </body>
-</html>*@
-
-
-
-
-
+﻿
 
   @Html.Partial("/Views/Shared/LayoutPartial/HeaderPartial.cshtml")
 
-  <body> 
+@await Component.InvokeAsync("NavigationBar")
+
       
 
-  @Html.Partial("/Views/Shared/LayoutPartial/NavigationBarPartial.cshtml")
-   
-  <!-- wpf loader Two -->
+  
+<body>
+    <!-- wpf loader Two -->
     <div id="wpf-loader-two">          
       <div class="wpf-loader-two-inner">
         <span>Loading</span>
@@ -38,7 +21,7 @@
 
 
   @RenderBody()
-
+    @Html.Partial("/Views/Shared/LayoutPartial/ScriptPartial.cshtml")
     @Html.Partial("/Views/Shared/LayoutPartial/FooterPartial.cshtml")
     
 
@@ -66,6 +49,6 @@
     </div><!-- /.modal-dialog -->
   </div>
 
-    @Html.Partial("/Views/Shared/LayoutPartial/ScriptPartial.cshtml")
+    
 
   </body>

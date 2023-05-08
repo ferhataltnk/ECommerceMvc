@@ -10,6 +10,9 @@ namespace DataAccess.Dapper.Abstract
 {
     public interface IProductDal
     {
-        public Result<List<Product>> GetProducts();
+        public Result<List<Product>> GetProductById(int id);
+        public Result<List<Product>> GetProductsByCategoryId(int categoryId);
+        public Result<List<Product>> GetProductsBySearchFilter(SearchFilterModel searchFilterModel);
+        
     }
 }

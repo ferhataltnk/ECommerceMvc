@@ -26,12 +26,17 @@ builder.Host.UseSerilog(Log.Logger);
 
 
 
-builder.Services.AddSingleton<IProductService,ProductManager>();
-builder.Services.AddSingleton<IProductDal,DpProductDal>();
+builder.Services.AddSingleton<IProductService, ProductManager>();
+builder.Services.AddSingleton<IProductDal, DpProductDal>();
 builder.Services.AddSingleton<IReviewService, ReviewManager>();
 builder.Services.AddSingleton<IReviewDal, DpReviewDal>();
 builder.Services.AddSingleton<ICartLineService, CartLineManager>();
 builder.Services.AddSingleton<ICartService, CartManager>();
+builder.Services.AddSingleton<ISubCategoryService, SubCategoryManager>();
+builder.Services.AddSingleton<ISubCategoryDal, DpSubCategoryDal>();
+builder.Services.AddSingleton<IOrderService, OrderManager>();
+builder.Services.AddSingleton<IOrderDal, DpOrderDal>();
+
 
 
 builder.Services.AddSession();

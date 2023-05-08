@@ -10,6 +10,8 @@ namespace Business.Services.Abstract
 {
     public interface IProductService
     {
-        public Result<List<Product>> GetProducts();
+       
+        public Task<Result<List<Product>>> GetProductsBySearchFilterAsync(SearchFilterModel searchFilterModel);
+        public Task<Result<List<Product>>> GetProductById(int id);
     }
 }

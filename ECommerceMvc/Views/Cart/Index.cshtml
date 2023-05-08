@@ -26,6 +26,7 @@
                         @foreach (var item in Model.CartLines)
                         {
                             <tr>
+                               
                                 <td style="vertical-align: middle;">
                                     <img src="@item.Product.ProductImage" width="50">
                                 </td>
@@ -60,14 +61,24 @@
                             <td colspan="4"></td>
                             <td>
                                 @Model.TotalPrice().Data.ToString("c")
+                               
                             </td>
+                            <td>
+                                <div style="text-align:center;">
+                                    <a asp-controller="Cart" asp-action="ClearCart" class="btn btn-danger">Sepeti Boşalt</a>
+                                </div>
+
+                            </td>
+
                         </tr>
                     </tfoot>
                 </table>
                
-                    <div style="text-align:center;">
-                    <a asp-controller="Cart" asp-action="ClearCart" class="btn btn-danger">Sepeti Boşalt</a>
+               
+                    <div style="text-align:center;" >
+                    <a asp-controller="Order" asp-action="InsertOrder" class="btn btn-success">Siparişi Tamamla</a>
                     </div>
+
             }
             else
             {

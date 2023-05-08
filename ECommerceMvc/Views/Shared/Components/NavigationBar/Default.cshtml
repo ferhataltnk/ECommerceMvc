@@ -1,127 +1,8 @@
-﻿@* <!-- banner bg main start -->
-<div class="banner_bg_main">
-
-    <!-- logo section start -->
-    <div class="logo_section">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="logo"><a href="/home/index"><img src="/theme/images/logo.png"></a></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- logo section end -->
-    <!-- header section start -->
-    <div class="header_section">
-        <div class="container">
-            <div class="containt_main">
-                <div id="mySidenav" class="sidenav">
-                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                    <a href="/theme/index.html">Home</a>
-                    <a href="/theme/fashion.html">Fashion</a>
-                    <a href="/theme/electronic.html">Electronic</a>
-                    <a href="/theme/jewellery.html">Jewellery</a>
-                </div>
-                <span class="toggle_icon" onclick="openNav()"><img src="/theme/images/toggle-icon.png"></span>
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Kategoriler
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </div>
-                <div class="main">
-                    <!-- Another variation with a button -->
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Ürün Ara">
-                        <div class="input-group-append">
-                            <button class="btn btn-secondary" type="button" style="background-color: #f26522; border-color:#f26522 ">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="header_box mr2">
-                    
-                    <div class="login_menu">
-                        <ul>
-                            <li>
-                                <a href="/Cart/Index">
-                                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                    <span class="padding_10">SEPETİM</span>
-                                </a>
-                            </li>
-                            
-                         
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-user" aria-hidden="true"></i>
-                                    <span class="padding_10">Kullanıcı</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- header section end -->
-    <!-- banner section start -->
-    <div class="banner_section layout_padding">
-        <div class="container">
-            <div id="my_slider" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <h1 class="banner_taital"> Her şey burada<br>Sevdiğiniz alışveriş yeri</h1>
-                                <div class="buynow_bt"><a href="#">ALIŞVERİŞ</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <h1 class="banner_taital"> Her şey burada<br>Sevdiğiniz alışveriş yeri</h1>
-                                <div class="buynow_bt"><a href="#">ALIŞVERİŞ</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <h1 class="banner_taital"> Her şey burada<br>Sevdiğiniz alışveriş yeri</h1>
-                                <div class="buynow_bt"><a href="#">ALIŞVERİŞ</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <a class="carousel-control-prev" href="#my_slider" role="button" data-slide="prev">
-                    <i class="fa fa-angle-left"></i>
-                </a>
-                <a class="carousel-control-next" href="#my_slider" role="button" data-slide="next">
-                    <i class="fa fa-angle-right"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-    <!-- banner section end -->
-</div>*@
-
-
-
-
-
+﻿@using Entities;
+@model SubCategoryModel
 
 <!-- Start header section -->
 <header id="aa-header">
-
-
     <!-- start header bottom  -->
     <div class="aa-header-bottom">
         <div class="container">
@@ -230,20 +111,20 @@
                 <div class="navbar-collapse collapse">
                     <!-- Left nav -->
                     <ul class="nav navbar-nav">
-                        <li><a href="/Home/Index">Ana Sayfa</a></li>
+                        <li><a asp-action="Index" asp-controller="Home">Ana Sayfa</a></li>
                         <li>
-                            <a href="#">Erkek <span class="caret"></span></a>
+                            <a href="@Url.Action("Index", "Product", new { categoryId = 2 })">Erkek <span class="caret"></span></a>
+
+                            @*<a href="/Product/Index/2">Erkek <span class="caret"></span></a>*@
+                            @*<a asp-action="Index" asp-controller="Product" asp-route-id="2">Erkek <span class="caret"></span></a>*@
                             <ul class="dropdown-menu">
-                                <li><a href="#">Casual</a></li>
-                                <li><a href="#">Sports</a></li>
-                                <li><a href="#">Formal</a></li>
-                                <li><a href="#">Standard</a></li>
-                                <li><a href="#">T-Shirts</a></li>
-                                <li><a href="#">Shirts</a></li>
-                                <li><a href="#">Jeans</a></li>
-                                <li><a href="#">Trousers</a></li>
+                                @foreach (var item in @Model.ManCategories)
+                                {
+                                    <li><a href="#">@item</a></li>
+                                }
+                             
                                 <li>
-                                    <a href="#">And more.. <span class="caret"></span></a>
+                                    <a href="#">Daha Fazla.. <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="#">Sleep Wear</a></li>
                                         <li><a href="#">Sandals</a></li>
@@ -253,17 +134,19 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="#">Kadın <span class="caret"></span></a>
+                            <a href="@Url.Action("Index", "Product", new { categoryId = 1 })">Kadın <span class="caret"></span></a>
+
+                            @*<a href="/Product/Index/1">Kadın <span class="caret"></span></a>*@
+                            @*<a asp-action="Index" asp-controller="Product" asp-route-id="1">Kadın <span class="caret"></span></a>*@
+
                             <ul class="dropdown-menu">
-                                <li><a href="#">Kurta & Kurti</a></li>
-                                <li><a href="#">Trousers</a></li>
-                                <li><a href="#">Casual</a></li>
-                                <li><a href="#">Sports</a></li>
-                                <li><a href="#">Formal</a></li>
-                                <li><a href="#">Sarees</a></li>
-                                <li><a href="#">Shoes</a></li>
+                                @foreach (var item in Model.WomanCategories)
+                                {
+                                    <li><a href="#">@item</a></li>
+                                }
+                             
                                 <li>
-                                    <a href="#">And more.. <span class="caret"></span></a>
+                                    <a href="#">Daha Fazla.. <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="#">Sleep Wear</a></li>
                                         <li><a href="#">Sandals</a></li>
@@ -298,7 +181,10 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="#">Çocuk <span class="caret"></span></a>
+                            <a href="@Url.Action("Index", "Product", new { categoryId = 4 })">Çocuk <span class="caret"></span></a>
+
+                            @*<a href="/Product/Index/4">Çocuk <span class="caret"></span></a>*@
+                            @*<a asp-action="Index" asp-controller="Product" asp-route-id="4">Çocuk <span class="caret"></span></a>*@
                             <ul class="dropdown-menu">
                                 <li><a href="#">Casual</a></li>
                                 <li><a href="#">Sports</a></li>
@@ -318,18 +204,32 @@
                                 </li>
                             </ul>
                         </li>
-                        <li><a href="#">Spor</a></li>
                         <li>
-                            <a href="#">Elektronik <span class="caret"></span></a>
+                            <a href="@Url.Action("Index", "Product", new { categoryId = 5 })">Spor <span class="caret"></span></a>
+
+                            @*<a href="/Product/Index/5">Spor <span class="caret"></span></a>*@
+
+                            @*<a asp-action="Index" asp-controller="Product" asp-route-id="5">Spor <span class="caret"></span></a>*@
+
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "Product", new { categoryId = 3 })">Elektronik <span class="caret"></span></a>
+
+                            @*<a href="/Product/Index/3">Digital <span class="caret"></span></a>*@
+                            @*<a asp-action="Index" asp-controller="Product" asp-route-id="3">Elektronik <span class="caret"></span></a>*@
                             <ul class="dropdown-menu">
-                                <li><a href="#">Camera</a></li>
-                                <li><a href="#">Mobile</a></li>
-                                <li><a href="#">Tablet</a></li>
-                                <li><a href="#">Laptop</a></li>
-                                <li><a href="#">Accesories</a></li>
+                               @foreach (var item in Model.ElectronicCategories)
+                                {
+                                    <li><a href="#">@item</a></li>
+                                }
                             </ul>
                         </li>
-                        <li><a href="#">Mobilya</a></li>
+                        <li>
+                            @* <a href="/Product/Index/6">Mobilya <span class="caret"></span></a>*@
+                            <a href="@Url.Action("Index", "Product", new { categoryId = 6 })">Mobilya <span class="caret"></span></a>
+
+                            @*<a asp-action="Index" asp-controller="Product" asp-route-id="6">Mobilya <span class="caret"></span></a>*@
+                        </li>
 
                     </ul>
 
@@ -339,11 +239,3 @@
     </div>
 </section>
 <!-- / menu -->
-
-
-
-
-
-
-
-
